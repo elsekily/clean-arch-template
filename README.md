@@ -19,7 +19,7 @@
 
 ```bash
 # Install the template
-dotnet new install Elsekily.CleanArchTemplate
+dotnet new install .
 
 # Scaffold a new project
 dotnet new elsekily-api -n MyCompany.MyProject

@@ -1,0 +1,22 @@
+{
+  "templates": [
+    {
+      "templateId": "Elsekily.CleanArchTemplate",
+      "version": "1.0.0",
+      "shortName": "elsekily-api",
+      "install": {
+        "from": "nuget",
+        "command": "dotnet new install Elsekily.CleanArchTemplate::1.0.0"
+      },
+      "alternativeInstall": {
+        "from": "github",
+        "command": "dotnet new install https://github.com/elsekily/elsekily-clean-arch-template"
+      },
+      "use": "dotnet new elsekily-api -n YourProjectName",
+      "description": "Elsekily Clean Architecture ASP.NET Core 8 — CQRS, EF Core, JWT, Serilog, Quartz.NET",
+      "author": "Youssef Elsekily",
+      "tags": ["clean-architecture", "cqrs", "aspnetcore", "efcore", "jwt", "serilog"],
+      "dotnet": ">=8.0"
+    }
+  ]
+}

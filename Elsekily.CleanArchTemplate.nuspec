@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Elsekily.CleanArchTemplate</id>
+    <version>1.0.0</version>
+    <title>Elsekily Clean Architecture Template</title>
+    <authors>Youssef Elsekily</authors>
+    <owners>Youssef Elsekily</owners>
+    <description>
+      A production-ready Clean Architecture ASP.NET Core 8 solution template.
+      Includes: CQRS (manual, no MediatR), Entity Framework Core (SQL Server),
+      FluentValidation, Serilog structured logging, JWT authentication,
+      IP Rate Limiting, Quartz.NET background jobs, and 3 working middlewares.
+    </description>
+    <tags>dotnet-template clean-architecture cqrs aspnetcore efcore serilog jwt</tags>
+    <packageTypes>
+      <packageType name="Template" />
+    </packageTypes>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/elsekily/elsekily-clean-arch-template</projectUrl>
+    <repository type="git" url="https://github.com/elsekily/elsekily-clean-arch-template" />
+  </metadata>
+  <files>
+    <file src="**" target="content" exclude="**\bin\**;**\obj\**;**\.vs\**" />
+  </files>
+</package>

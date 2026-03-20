@@ -27,15 +27,164 @@
           "description": ".NET 8"
         },
         {
-          "choice": "net9.0",
-          "description": ".NET 9"
+          "choice": "net10.0",
+          "description": ".NET 10"
         }
       ],
-      "defaultValue": "net8.0",
-      "replaces": "net8.0"
+      "defaultValue": "net10.0",
+      "replaces": "net10.0"
+    },
+    "ProjectSafeName": {
+      "type": "generated",
+      "generator": "casing",
+      "parameters": {
+        "source": "name",
+        "type": "PascalCase"
+      }
+    },
+    "DbContextName": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "AppDbContext",
+      "fileRename": "AppDbContext",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": [
+          {
+            "regex": "$",
+            "replacement": "DbContext"
+          }
+        ]
+      }
+    },
+    "UnitOfWorkName": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "AppUnitOfWork",
+      "fileRename": "AppUnitOfWork",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": [
+          {
+            "regex": "$",
+            "replacement": "UnitOfWork"
+          }
+        ]
+      }
+    },
+    "IUnitOfWorkName": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "IAppUnitOfWork",
+      "fileRename": "IAppUnitOfWork",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": [
+          {
+            "regex": "$",
+            "replacement": "UnitOfWork"
+          },
+          {
+            "regex": "^",
+            "replacement": "I"
+          }
+        ]
+      }
+    },
+    "ConnectionStringKey": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "\"App\":",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": [
+          {
+            "regex": "^",
+            "replacement": "\""
+          },
+          {
+            "regex": "$",
+            "replacement": "\":"
+          }
+        ]
+      }
+    },
+    "ConnectionStringCall": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "GetConnectionString(\"App\")",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": [
+          {
+            "regex": "^",
+            "replacement": "GetConnectionString(\""
+          },
+          {
+            "regex": "$",
+            "replacement": "\")"
+          }
+        ]
+      }
+    },
+    "HttpPort": {
+      "type": "generated",
+      "generator": "random",
+      "parameters": {
+        "low": 5000,
+        "high": 9000
+      },
+      "replaces": "5000"
+    },
+    "HttpsPort": {
+      "type": "generated",
+      "generator": "random",
+      "parameters": {
+        "low": 5001,
+        "high": 9001
+      },
+      "replaces": "5001"
+    },
+    "AppDirRename": {
+      "type": "generated",
+      "generator": "regex",
+      "dataType": "string",
+      "replaces": "AppDir",
+      "fileRename": "AppDir",
+      "parameters": {
+        "source": "ProjectSafeName",
+        "steps": []
+      }
     }
   },
-  "description": "A Clean Architecture ASP.NET Core 8 solution template with CQRS (manual, no MediatR), Entity Framework Core, FluentValidation, Serilog, JWT auth, rate limiting, and Quartz.NET. By Youssef Elsekily.",
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "exclude": [
+            "README.md",
+            ".git/**",
+            ".vs/**",
+            "*.nuspec",
+            "elsekily-template-install.json"
+          ]
+        }
+      ]
+    },
+    {
+      "source": ".template.config/resources",
+      "target": "./",
+      "include": [
+        "README.md"
+      ]
+    }
+  ],
+  "description": "A Clean Architecture ASP.NET Core 10 solution template with CQRS (manual, no MediatR), Entity Framework Core, FluentValidation, Serilog, JWT auth, rate limiting, and Quartz.NET. By Youssef Elsekily.",
   "primaryOutputs": [
     {
       "path": "Elsekily.sln"

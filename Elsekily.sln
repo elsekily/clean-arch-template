@@ -1,19 +1,16 @@
-
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.4.11612.150 stable
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\API\API.csproj", "{A1000001-0001-0001-0001-000000000006}"
+EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "src\Domain\Domain.csproj", "{A1000001-0001-0001-0001-000000000001}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "src\Application\Application.csproj", "{A1000001-0001-0001-0001-000000000002}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "src\Common\Common.csproj", "{A1000001-0001-0001-0001-000000000003}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "src\Infrastructure\Infrastructure.csproj", "{A1000001-0001-0001-0001-000000000004}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Persistence", "src\Persistence\Persistence.csproj", "{A1000001-0001-0001-0001-000000000005}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "src\API\API.csproj", "{A1000001-0001-0001-0001-000000000006}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A1000001-0001-0001-0001-000000000010}"
 EndProject
@@ -31,10 +28,6 @@ Global
 		{A1000001-0001-0001-0001-000000000002}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1000001-0001-0001-0001-000000000002}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1000001-0001-0001-0001-000000000002}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A1000001-0001-0001-0001-000000000003}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A1000001-0001-0001-0001-000000000003}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A1000001-0001-0001-0001-000000000003}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A1000001-0001-0001-0001-000000000003}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1000001-0001-0001-0001-000000000004}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1000001-0001-0001-0001-000000000004}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1000001-0001-0001-0001-000000000004}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -48,15 +41,14 @@ Global
 		{A1000001-0001-0001-0001-000000000006}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1000001-0001-0001-0001-000000000006}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{A1000001-0001-0001-0001-000000000001} = {A1000001-0001-0001-0001-000000000010}
 		{A1000001-0001-0001-0001-000000000002} = {A1000001-0001-0001-0001-000000000010}
-		{A1000001-0001-0001-0001-000000000003} = {A1000001-0001-0001-0001-000000000010}
 		{A1000001-0001-0001-0001-000000000004} = {A1000001-0001-0001-0001-000000000010}
 		{A1000001-0001-0001-0001-000000000005} = {A1000001-0001-0001-0001-000000000010}
 		{A1000001-0001-0001-0001-000000000006} = {A1000001-0001-0001-0001-000000000010}
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 EndGlobal

@@ -1,4 +1,7 @@
+using Elsekily.Application.Common.Interfaces.Common;
+using Elsekily.Infrastructure.Identity;
 using Microsoft.Extensions.Configuration;
+using Quartz;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
@@ -12,6 +15,7 @@ public static class InfrastructureDependencyInjection
         AddBackgroundJobs(services);
 
         // TODO: add infrastructure service registrations
+        services.AddScoped<IUserService, UserService>();
         // services.AddSingleton<ICacheService, InMemoryCacheService>();
         // services.AddScoped<IEmailService, SmtpEmailService>();
 

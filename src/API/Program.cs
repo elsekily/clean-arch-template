@@ -1,6 +1,6 @@
+using API;
 using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using Serilog.Enrichers.Span;
@@ -9,10 +9,12 @@ using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddHttpContextAccessor();
+builder.Services.AddLocalization();
+
 // ─── Secrets & extra config ───────────────────────────────────────────────
 builder.Configuration
-    .AddJsonFile("appsettings.secrets.json", optional: true, reloadOnChange: false)
-    .AddJsonFile("appsettings.RateLimit.json", optional: false, reloadOnChange: true);
+    .AddJsonFile("appsettings.RateLimit.json");
 
 // ─── Logging (Serilog) ────────────────────────────────────────────────────
 var env = builder.Environment;
@@ -34,10 +36,18 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+// ─── Options ───────────────────────────────────────────────────
+#region Configs
+
+#endregion
+
+
 // ─── JWT Authentication ───────────────────────────────────────────────────
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -45,6 +55,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ClockSkew = TimeSpan.Zero,
+
             ValidIssuer = builder.Configuration["Jwt:Issuer"],
             ValidAudience = builder.Configuration["Jwt:Audience"],
             IssuerSigningKey = new SymmetricSecurityKey(
@@ -56,8 +67,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services
     .AddApplicationServices()
     .AddInfrastructureServices(builder.Configuration)
-    .AddPersistenceServices(builder.Configuration)
-    .AddCommonServices();
+    .AddPersistenceServices(builder.Configuration);
 
 // ─── Rate Limiting ─────────────────────────────────────────────────────────
 builder.Services.AddMemoryCache();
@@ -81,11 +91,8 @@ builder.Services.AddSwaggerGen();
 // ─── CORS ─────────────────────────────────────────────────────────────────
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("LocalCorsPolicy", policy =>
-        policy.WithOrigins("http://localhost:4200")
-              .AllowAnyMethod()
-              .AllowAnyHeader()
-              .AllowCredentials());
+    options.AddPolicy(Constants.AllowAllCors, policy =>
+        policy.AllowCredentials());
 });
 
 // ─── Pipeline ─────────────────────────────────────────────────────────────
@@ -95,15 +102,23 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-    app.UseCors("LocalCorsPolicy");
+    app.UseCors(Constants.AllowAllCors);
 }
 
 app.UseHsts();
 app.UseHttpsRedirection();
+
+var supportedCultures = new[] { "en", "ar" };
+var localizationOptions = new RequestLocalizationOptions()
+    .SetDefaultCulture(supportedCultures[0])
+    .AddSupportedCultures(supportedCultures)
+    .AddSupportedUICultures(supportedCultures);
+
+app.UseRequestLocalization(localizationOptions);
+
 app.UseIpRateLimiting();
 app.UseRouting();
 
-app.UseMiddleware<Elsekily.API.Middlewares.JwtCookieMiddleware>();
 app.UseAuthentication();
 app.UseMiddleware<Elsekily.API.Middlewares.GlobalErrorHandlingMiddleware>();
 app.UseMiddleware<Elsekily.API.Middlewares.CorrelationIdMiddleware>();

@@ -1,15 +1,15 @@
-using Elsekily.Application.Common.Models;
+using Elsekily.Application.Features.IsAlive.Queries.GetIsAlive;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Elsekily.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class IsAliveController : ControllerBase
+public class IsAliveController(IGetIsAliveQuery getIsAliveQuery) : ControllerBase
 {
     [HttpGet]
-    public IActionResult Get()
+    public async Task<IActionResult> Get()
     {
-        return Ok(Result<object>.Success(new { Status = "Alive", Time = DateTime.Now }));
+        return Ok(await getIsAliveQuery.ExecuteAsync());
     }
 }

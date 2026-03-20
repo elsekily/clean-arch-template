@@ -1,3 +1,5 @@
+using Elsekily.Application.Features.IsAlive.Queries.GetIsAlive;
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 public static class DependencyInjection
@@ -8,10 +10,7 @@ public static class DependencyInjection
     /// </summary>
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        // TODO: register your Commands and Queries here
-        // Example:
-        // services.AddScoped<IGetItemsQuery, GetItemsQuery>();
-        // services.AddScoped<ICreateItemCommand, CreateItemCommand>();
+        services.AddScoped<IGetIsAliveQuery, GetIsAliveQuery>();
 
         return services;
     }

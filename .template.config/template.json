@@ -16,6 +16,11 @@
     "language": "C#",
     "type": "solution"
   },
+  "forms": {
+    "pascalCase": {
+      "identifier": "pascalCase"
+    }
+  },
   "symbols": {
     "Framework": {
       "type": "parameter",
@@ -35,12 +40,9 @@
       "replaces": "net10.0"
     },
     "ProjectSafeName": {
-      "type": "generated",
-      "generator": "casing",
-      "parameters": {
-        "source": "name",
-        "type": "PascalCase"
-      }
+      "type": "derived",
+      "valueSource": "name",
+      "valueTransform": "pascalCase"
     },
     "DbContextName": {
       "type": "generated",

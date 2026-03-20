@@ -1,4 +1,4 @@
-﻿using Elsekily.Application.Common.Interfaces.Persistence.UnitOfWorks;
+using Elsekily.Application.Common.Interfaces.Persistence.UnitOfWorks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Persistence.Contexts.AppDir;
@@ -14,6 +14,10 @@ namespace Persistence.UnitOfWorks
         public AppUnitOfWork(AppDbContext context)
         {
             _context = context;
+        }
+        public async Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
+        {
+            return await _context.Database.CanConnectAsync(cancellationToken);
         }
         public async Task CommitAsync(CancellationToken cancellationToken = default)
         {
